@@ -24,6 +24,7 @@ namespace BookStore_Management.Helpers
             // Category
             CreateMap<Category, CategoryDto>();
             CreateMap<CreateCategoryDto, Category>();
+            CreateMap<Category, UpdateCategoryDto>().ReverseMap();
 
             // Cart
             CreateMap<CartItem, CartItemDto>()
