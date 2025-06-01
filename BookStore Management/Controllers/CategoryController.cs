@@ -1,6 +1,6 @@
 ﻿using BookStore_Management.ModelDtos.CategoryDtos;
 using BookStore_Management.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore_Management.Controllers
@@ -31,6 +31,8 @@ namespace BookStore_Management.Controllers
         }
 
         [HttpPost]
+        [Authorize("Admin")]
+
         public async Task<ActionResult<CategoryDto>> Create(CreateCategoryDto dto)
         {
             var created = await _service.CreateCategoryAsync(dto);
@@ -38,6 +40,8 @@ namespace BookStore_Management.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize("Admin")]
+
         public async Task<IActionResult> Update(int id, UpdateCategoryDto dto)
         {
             if (id != dto.Id) return BadRequest();
@@ -46,6 +50,8 @@ namespace BookStore_Management.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize("Admin")]
+
         public async Task<IActionResult> Delete(int id)
         {
             var success = await _service.DeleteCategoryAsync(id);

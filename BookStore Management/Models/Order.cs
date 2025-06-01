@@ -16,7 +16,6 @@ namespace BookStore_Management.Models
         [Required]
         public DateTime Date { get; set; } = DateTime.UtcNow;
 
-        public User User { get; set; }
 
         public ICollection<OrderItem> OrderItems { get; set; }
     }

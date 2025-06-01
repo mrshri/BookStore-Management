@@ -16,7 +16,6 @@ namespace BookStore_Management.Models
         [Required, Range(1, 1000)]
         public int Quantity { get; set; }
 
-        public User User { get; set; }
         public Book Book { get; set; }
     }
 }
