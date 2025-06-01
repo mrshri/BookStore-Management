@@ -5,7 +5,9 @@ using BookStore_Management.Repositories;
 using BookStore_Management.Repositories.Interfaces;
 using BookStore_Management.Services;
 using BookStore_Management.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 namespace BookStore_Management
 {
@@ -23,8 +25,8 @@ namespace BookStore_Management
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
             //Add DBContext
-            builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             //configure services& repositories
             builder.Services.AddScoped<IBookRepository, BookRepository>();
@@ -33,9 +35,45 @@ namespace BookStore_Management
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
 
+            builder.AddAppAuthentication();
+            builder.Services.AddAuthentication();
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", policy =>
+                    policy.RequireRole("Admin"));
+            });
+
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            
+
+            //adding Authorization to swagger
+            builder.Services.AddSwaggerGen(option =>
+            {
+                option.AddSecurityDefinition(name: JwtBearerDefaults.AuthenticationScheme, securityScheme: new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Description = "Enter the Bearer Authorization string as following string as following : `Bearer Generated-JWT-Token`",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = JwtBearerDefaults.AuthenticationScheme,
+                });
+                option.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = JwtBearerDefaults.AuthenticationScheme
+                }
+            },
+            new string[] {}
+        }
+    });
+            });
 
             var app = builder.Build();
 
@@ -48,6 +86,7 @@ namespace BookStore_Management
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

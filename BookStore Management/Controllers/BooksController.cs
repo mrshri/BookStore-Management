@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using BookStore_Management.ModelDtos.BookDtos;
 using BookStore_Management.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore_Management.Controllers
 {
+    
     [Route("api/book")]
     [ApiController]
     public class BooksController : ControllerBase
@@ -33,6 +35,8 @@ namespace BookStore_Management.Controllers
         }
 
         [HttpPost]
+        [Authorize("Admin")]
+
         public async Task<ActionResult<BookDto>> CreateBook(CreateBookDto dto)
         {
             var createdBook = await _bookService.CreateBookAsync(dto);
@@ -40,6 +44,8 @@ namespace BookStore_Management.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize("Admin")]
+
         public async Task<IActionResult> UpdateBook(int id, UpdateBookDto dto)
         {
             if (id != dto.Id) return BadRequest();
@@ -48,6 +54,8 @@ namespace BookStore_Management.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize("Admin")]
+
         public async Task<IActionResult> DeleteBook(int id)
         {
             var deleted = await _bookService.DeleteBookAsync(id);

@@ -11,9 +11,7 @@ namespace BookStore_Management.Helpers
     public class MappingProfile : Profile
     {
         public MappingProfile() {
-            // User
-            CreateMap<User, UserDto>();
-            CreateMap<RegisterUserDto, User>();
+            
 
             // Book
             CreateMap<Book, BookDto>()
