@@ -85,6 +85,7 @@ namespace BookStore_Management
             }
 
             app.UseHttpsRedirection();
+            app.UseCors(policy =>policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
 
             app.UseAuthentication();
             app.UseAuthorization();
