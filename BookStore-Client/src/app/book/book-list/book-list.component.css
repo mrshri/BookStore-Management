@@ -1,0 +1,135 @@
+/* Grid Container */
+.book-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  justify-items: center;
+}
+
+/* Individual Book Card */
+.book-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 15px;
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Book Image */
+.book-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+/* Content Styling */
+.book-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 5px 0;
+}
+
+.book-author {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.book-description {
+  font-size: 0.9rem;
+  text-align: justify;
+}
+
+.read-toggle {
+  color: #007bff;
+  cursor: pointer;
+  margin-left: 6px;
+  text-decoration: none;
+}
+
+.read-toggle:hover {
+  color: #0056b3;
+}
+
+/* Pagination styling */
+pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  font-size: 1.2rem;
+  color: aqua;
+}
+
+
+.book-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.page-heading {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: whitesmoke;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 20px 0;
+  color:black;
+}
+
+.search-bar {
+  margin-bottom: 30px;
+}
+
+.search-input {
+  padding: 10px 15px;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 350px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+/* backgraound image */
+.book-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  text-align: center;
+  background-image: url('../../../assets/Library.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  /* color: #fff;  */
+  backdrop-filter: brightness(0.85);
+}

@@ -1,0 +1,35 @@
+
+
+<div class="book-page-container">
+  <h2 class="page-heading">📚 Available Books</h2>
+
+  <h3 class="section-title">Book List</h3>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="filterBooks()"
+      placeholder="Search books..."
+      class="search-input"
+    />
+  </div>
+  <!-- Book Cards -->
+<div class="book-container">
+  <div class="book-card"  *ngFor="let book of (filteredBooks | paginate: { itemsPerPage: 4, currentPage: p })">
+    <img [src]="book.imageUrl || 'assets/no-image.png'" alt="{{ book.title }}" class="book-image" />
+
+    <div class="book-content">
+      <h3 class="book-title">{{ book.title }}</h3>
+      <p class="book-author"><em>by {{ book.author }}</em></p>
+      <p class="book-description">
+        {{ showFullDescription[book.id] ? book.description : (book.description | slice:0:100) + '...' }}
+        <a (click)="toggleDescription(book.id)" class="read-toggle">
+          {{ showFullDescription[book.id] ? 'Read Less' : 'Read More' }}
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
