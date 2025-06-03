@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../shared/services/category.service';
 import { Category } from '../../shared/models/category';
 
@@ -7,23 +7,22 @@ import { Category } from '../../shared/models/category';
   standalone: false,
   templateUrl: './category-list.component.html',
   styleUrl: './category-list.component.css',
-  providers: [CategoryService] // Add any services needed for this component here
 
 })
-export class CategoryListComponent {
-categories: Category[] = []; // Adjust type as per your Category model
+export class CategoryComponent implements OnInit {
+  categories: Category[] = [];
 
-constructor(private categoryService: CategoryService) {}
-ngongOnInit() {
-  // Initialization logic can go here
-  this.categoryService.getCategories().subscribe({
-    next: (categories) => {
-      this.categories = categories;
-      console.log('Categories fetched successfully:', categories);
-    },
-    error: (error) => {
-      console.error('Error fetching categories:', error);
-    }
-  }); 
-}
+  constructor(private categoryService: CategoryService) {}
+
+  ngOnInit(): void {
+    this.categoryService.getAllCategories().subscribe({
+      next: (data) => {
+        console.log('Categories received:', data);
+        this.categories = data;
+      },
+      error: (err) => {
+        console.error('Error fetching categories:', err);
+      }
+    });
+  }
 }

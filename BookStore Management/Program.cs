@@ -43,6 +43,14 @@ namespace BookStore_Management
                     policy.RequireRole("Admin"));
             });
 
+            //add cors
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader());
+            });
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -85,7 +93,7 @@ namespace BookStore_Management
             }
 
             app.UseHttpsRedirection();
-            app.UseCors(policy =>policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+            app.UseCors("AllowAll");
 
             app.UseAuthentication();
             app.UseAuthorization();
