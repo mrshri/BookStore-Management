@@ -6,7 +6,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CategoryListComponent } from './category/category-list/category-list.component';
 import { BookListComponent } from './book/book-list/book-list.component';
 import { BookService } from './shared/services/book.service';
 
@@ -14,6 +13,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HomeComponent } from './home/home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar/navbar.component';
+import { CategoryComponent } from './category/category-list/category-list.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -26,7 +26,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    CategoryListComponent,
+    CategoryComponent,
     BookListComponent,
     HomeComponent,
     NavbarComponent

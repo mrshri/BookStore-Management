@@ -19,7 +19,7 @@ export class BookListComponent {
   filteredBooks: Book[] = [];
   searchTerm: string = '';
   p: number = 1; 
-showFullDescription: { [bookId: number]: boolean } = {};
+  showFullDescription: { [bookId: number]: boolean } = {};
 
 
 
