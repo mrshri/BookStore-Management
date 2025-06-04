@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { HomeComponent } from './home/home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar/navbar.component';
 import { CategoryComponent } from './category/category-list/category-list.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -29,7 +32,9 @@ const routes: Routes = [
     CategoryComponent,
     BookListComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,7 @@ const routes: Routes = [
     HttpClientModule,
     AppRoutingModule,
     NgxPaginationModule,
-    RouterModule.forRoot(routes), // ✅ use forRoot here
+    RouterModule.forRoot(routes), 
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -49,7 +54,13 @@ const routes: Routes = [
       }
     })
   ],
-  providers: [BookService],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

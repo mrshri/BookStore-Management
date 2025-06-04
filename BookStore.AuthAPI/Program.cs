@@ -26,6 +26,14 @@ namespace BookStore.AuthAPI
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
+            //add cors
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader());
+            });
 
             //register services
             builder.Services.AddScoped<IAuthService,AuthService>();
@@ -47,6 +55,7 @@ namespace BookStore.AuthAPI
 
             app.UseHttpsRedirection();
 
+            app.UseCors("AllowAll");
             app.UseAuthentication();
             app.UseAuthorization();
 
