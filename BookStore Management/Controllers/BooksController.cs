@@ -61,6 +61,17 @@ namespace BookStore_Management.Controllers
             var deleted = await _bookService.DeleteBookAsync(id);
             return deleted ? NoContent() : NotFound();
         }
+
+        [HttpGet("category/{categoryId}")]
+        public async Task<IActionResult> GetBooksByCategory(int categoryId)
+        {
+            var books = await _bookService.GetBooksByCategoryAsync(categoryId);
+            if (!books.Any())
+                return NotFound("No books found for this category.");
+
+            return Ok(books);
+        }
+
     }
-    
+
 }

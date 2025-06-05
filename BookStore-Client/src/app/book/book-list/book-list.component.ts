@@ -29,7 +29,6 @@ export class BookListComponent {
     this.bookService.getAllBooks().subscribe({
       next: (books) => {
         this.books = books;
-        console.log('Books fetched successfully:', books);
          this.filteredBooks = books;;
       },
       error: (error) => {

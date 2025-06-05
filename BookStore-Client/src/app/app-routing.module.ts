@@ -6,6 +6,7 @@ import { CategoryComponent } from './category/category-list/category-list.compon
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { authGuard } from './auth/auth.guard';
+import { CategoryBooksComponent } from './category-books/category-books.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,7 +14,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   
   { path: 'books', component: BookListComponent,canActivate:[authGuard] },
-
+{ path: 'categories/:id', component: CategoryBooksComponent },
   { path: 'categories', component: CategoryComponent ,canActivate:[authGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

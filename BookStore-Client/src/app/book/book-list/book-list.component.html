@@ -14,7 +14,7 @@
   </div>
   <!-- Book Cards -->
 <div class="book-container">
-  <div class="book-card"  *ngFor="let book of (filteredBooks | paginate: { itemsPerPage: 4, currentPage: p })">
+  <div class="book-card"  *ngFor="let book of (filteredBooks | paginate: { itemsPerPage: 5, currentPage: p })">
     <img [src]="book.imageUrl || 'assets/no-image.png'" alt="{{ book.title }}" class="book-image" />
 
     <div class="book-content">

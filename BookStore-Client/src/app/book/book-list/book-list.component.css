@@ -85,7 +85,7 @@ pagination-controls {
 .page-heading {
   font-size: 2.2rem;
   font-weight: bold;
-  color: whitesmoke;
+  color: rgba(14, 210, 27, 0.949);
   margin-bottom: 10px;
 }
 
@@ -120,7 +120,7 @@ pagination-controls {
 
 /* backgraound image */
 .book-page-container {
-  max-width: 1200px;
+  max-width: 2000px;
   margin: 0 auto;
   padding: 30px 20px;
   text-align: center;
@@ -128,8 +128,6 @@ pagination-controls {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  /* color: #fff;  */
   backdrop-filter: brightness(0.85);
 }
