@@ -17,6 +17,7 @@ import { CategoryComponent } from './category/category-list/category-list.compon
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
+import { CategoryBooksComponent } from './category-books/category-books.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -34,7 +35,8 @@ const routes: Routes = [
     HomeComponent,
     NavbarComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CategoryBooksComponent
   ],
   imports: [
     BrowserModule,

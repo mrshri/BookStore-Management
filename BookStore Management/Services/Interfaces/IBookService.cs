@@ -9,5 +9,7 @@ namespace BookStore_Management.Services.Interfaces
         Task<BookDto> CreateBookAsync(CreateBookDto dto);
         Task<bool> UpdateBookAsync(UpdateBookDto dto);
         Task<bool> DeleteBookAsync(int id);
+        Task<IEnumerable<BookDto>> GetBooksByCategoryAsync(int categoryId);
+
     }
 }

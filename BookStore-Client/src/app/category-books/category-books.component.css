@@ -1,0 +1,10 @@
+.bg-category {
+  background-image: url('../../assets/category.jpg'); /* Adjust path as needed */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  backdrop-filter: brightness(0.95);
+}

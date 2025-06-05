@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BookStore_Management.ModelDtos.BookDtos;
 using BookStore_Management.Models;
+using BookStore_Management.Repositories;
 using BookStore_Management.Repositories.Interfaces;
 using BookStore_Management.Services.Interfaces;
 
@@ -58,5 +59,19 @@ namespace BookStore_Management.Services
 
         }
 
+        public async Task<IEnumerable<BookDto>> GetBooksByCategoryAsync(int categoryId)
+        {
+            var books = await _bookRepo.GetBooksByCategoryAsync(categoryId);
+            return books.Select(b => new BookDto
+            {
+                Id = b.Id,
+                Title = b.Title,
+                Author = b.Author,
+                Description = b.Description,
+                Price = b.Price,
+                ImageUrl = b.ImageUrl,
+                CategoryName = b.Category?.Name  // Ensure Category is not null
+            });
+        }
     }
 }

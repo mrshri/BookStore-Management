@@ -18,4 +18,8 @@ export class BookService {
   getBook(id: number): Observable<Book> {
     return this.http.get<Book>(`${this.apiUrl}/${id}`);
   }
+  getBooksByCategory(categoryId: string) {
+  return this.http.get<Book[]>(`https://localhost:7293/api/book/category/${categoryId}`);
+}
+
 }

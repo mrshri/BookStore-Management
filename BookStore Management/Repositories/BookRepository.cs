@@ -47,5 +47,13 @@ namespace BookStore_Management.Repositories
             _Context.Books.Update(book);
             await _Context.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Book>> GetBooksByCategoryAsync(int categoryId)
+        {
+            return await _Context.Books
+                        .Include(b => b.Category)
+                        .Where(b => b.CategoryId == categoryId)
+                        .ToListAsync();
+        }
     }
 }
