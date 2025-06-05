@@ -1,8 +1,30 @@
-<div class="container mt-5">
-  <h2 class="text-white">Login</h2>
-  <form (ngSubmit)="login()">
-    <input [(ngModel)]="credentials.userName" name="UserName" type="email" class="form-control mb-2" placeholder="Email..." required>
-    <input [(ngModel)]="credentials.password" name="password" type="password" class="form-control mb-2" placeholder="Password..." required>
-    <button class="btn btn-success">Login</button>
-  </form>
+
+<div class="login-wrapper"></div>
+<div class="login-page d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 shadow-lg" style="width: 100%; max-width: 400px;">
+    <h3 class="text-center mb-4 text-primary">🔐 Login</h3>
+    <form (ngSubmit)="login()">
+      <div class="form-group mb-3">
+        <input
+          [(ngModel)]="credentials.userName"
+          name="UserName"
+          type="email"
+          class="form-control"
+          placeholder="Email"
+          required
+        />
+      </div>
+      <div class="form-group mb-3">
+        <input
+          [(ngModel)]="credentials.password"
+          name="password"
+          type="password"
+          class="form-control"
+          placeholder="Password"
+          required
+        />
+      </div>
+      <button class="btn btn-success w-100">Login</button>
+    </form>
+  </div>
 </div>
