@@ -10,15 +10,13 @@ import { CategoryBooksComponent } from './category-books/category-books.componen
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-
-  { path: 'home', component: HomeComponent },
-  
+  { path: 'home', component: HomeComponent },  
   { path: 'books', component: BookListComponent,canActivate:[authGuard] },
-{ path: 'categories/:id', component: CategoryBooksComponent },
+  { path: 'categories/:id', component: CategoryBooksComponent },
   { path: 'categories', component: CategoryComponent ,canActivate:[authGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-    { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

@@ -27,7 +27,5 @@ namespace BookStore_Management.Models
 
         public Category Category { get; set; }
 
-        public ICollection<OrderItem> OrderItems { get; set; }
-
     }
 }

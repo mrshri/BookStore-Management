@@ -4,6 +4,7 @@ using BookStore_Management.Models;
 using BookStore_Management.Repositories;
 using BookStore_Management.Repositories.Interfaces;
 using BookStore_Management.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore_Management.Services
 {
@@ -17,9 +18,9 @@ namespace BookStore_Management.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<BookDto>> GetAllBooksAsync()
+        public async Task<IEnumerable<BookDto>> GetAllBooksAsync([FromQuery] string?search)
         {
-          var books = await _bookRepo.GetAllAsync();
+          var books = await _bookRepo.GetAllAsync(search);
             return _mapper.Map<IEnumerable<BookDto>>(books);
         }
 
