@@ -12,7 +12,6 @@ export class CategoryService {
   constructor(private http: HttpClient) {}
 
   getAllCategories(): Observable<Category[]> {
-    console.log('Fetching categories from: ', this.apiUrl);
     return this.http.get<Category[]>(this.apiUrl);
   }
 }

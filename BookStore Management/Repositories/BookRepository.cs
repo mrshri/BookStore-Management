@@ -2,6 +2,7 @@
 using BookStore_Management.Models;
 using BookStore_Management.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore_Management.Repositories
@@ -14,9 +15,19 @@ namespace BookStore_Management.Repositories
             _Context = context;
         }
 
-        public async Task<IEnumerable<Book>> GetAllAsync()
+        public async Task<IEnumerable<Book>> GetAllAsync([FromQuery] string? search)
         {
-            return await _Context.Books.Include(c => c.Category).ToListAsync();
+            var books = await _Context.Books.Include(c => c.Category).ToListAsync();
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                books = books.Where(b =>
+                    b.Title.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+                    b.Author.Contains(search, StringComparison.OrdinalIgnoreCase) ||
+                    b.Description.Contains(search, StringComparison.OrdinalIgnoreCase)
+                ).ToList();
+            }
+
+            return books; 
         }
 
         public async Task<Book?> GetByIdAsync(int id)
@@ -31,8 +42,8 @@ namespace BookStore_Management.Repositories
 
         public async Task AddAsync(Book book)
         {
-           await _Context.Books.AddAsync(book);
-           await _Context.SaveChangesAsync();
+            await _Context.Books.AddAsync(book);
+            await _Context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Book book)
@@ -41,7 +52,6 @@ namespace BookStore_Management.Repositories
             await _Context.SaveChangesAsync();
         }
 
-      
         public async Task UpdateAsync(Book book)
         {
             _Context.Books.Update(book);

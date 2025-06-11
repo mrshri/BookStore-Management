@@ -3,6 +3,7 @@ using BookStore_Management.DATA;
 using BookStore_Management.Helpers;
 using BookStore_Management.Repositories;
 using BookStore_Management.Repositories.Interfaces;
+using BookStore_Management.Service.Interfaces;
 using BookStore_Management.Services;
 using BookStore_Management.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -34,6 +35,9 @@ namespace BookStore_Management
 
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+            builder.Services.AddScoped<ICartRepository, CartRepository>();
+            builder.Services.AddScoped<ICartService,CartService>();
 
             builder.AddAppAuthentication();
             builder.Services.AddAuthentication();

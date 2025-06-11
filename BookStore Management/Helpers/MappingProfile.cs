@@ -25,18 +25,14 @@ namespace BookStore_Management.Helpers
             CreateMap<Category, UpdateCategoryDto>().ReverseMap();
 
             // Cart
+            CreateMap<Cart, AddToCartDto>();
             CreateMap<CartItem, CartItemDto>()
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Book.Title))
                 .ForMember(dest => dest.UnitPrice, opt => opt.MapFrom(src => src.Book.Price));
 
-            // Order
             CreateMap<Order, OrderDto>();
             CreateMap<OrderItem, OrderItemDto>()
                 .ForMember(dest => dest.BookTitle, opt => opt.MapFrom(src => src.Book.Title));
-
-            CreateMap<CreateOrderDto, Order>();
-            CreateMap<CreateOrderItemDto, OrderItem>();
-
 
 
         }

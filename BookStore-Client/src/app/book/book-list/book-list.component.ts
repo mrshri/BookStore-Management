@@ -2,7 +2,6 @@ import { Component, NgModule } from '@angular/core';
 import { BookService } from '../../shared/services/book.service'; 
 import { Book } from '../../shared/models/book';
 import { CategoryService } from '../../shared/services/category.service';
-import { Category } from '../../shared/models/category';
 
 @Component({
   selector: 'app-book-list',
@@ -12,7 +11,6 @@ import { Category } from '../../shared/models/category';
   providers: [BookService,CategoryService]
 })
 
-
 export class BookListComponent {
 
   books: Book[] = [];
@@ -21,32 +19,30 @@ export class BookListComponent {
   p: number = 1; 
   showFullDescription: { [bookId: number]: boolean } = {};
 
-
-
   constructor(private bookService:BookService,private categoryService:CategoryService) {}
 
   ngOnInit() {
-    this.bookService.getAllBooks().subscribe({
-      next: (books) => {
-        this.books = books;
-         this.filteredBooks = books;;
-      },
-      error: (error) => {
-        console.error('Error fetching books:', error);
-      },
-      });
-
-    
+    this.searchBooks();    
   }
 
-  filterBooks() {
-  const term = this.searchTerm.toLowerCase();
-  this.filteredBooks = this.books.filter(book =>
-    book.title.toLowerCase().includes(term) || 
-    book.author.toLowerCase().includes(term)
-  );}
+  searchBooks() {
+    this.bookService.getAllBooks(this.searchTerm).subscribe((books: Book[]) => {
+      this.books = books;
+      this.filterBooks(); 
+    });
+  }  
 
-  toggleDescription(bookId: number): void {
+  filterBooks():void {
+  const term = this.searchTerm.toLowerCase();
+    this.filteredBooks = this.books.filter(book =>
+    book.title.toLowerCase().includes(term) || 
+    book.author.toLowerCase().includes(term) ||
+    book.description.toLowerCase().includes(term)
+  );
+  this.p = 1; 
+}
+
+toggleDescription(bookId: number): void {
     this.showFullDescription[bookId] = !this.showFullDescription[bookId];
   }
  
